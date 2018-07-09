@@ -1,12 +1,5 @@
 # Estimation Project #
 
-This README is broken down into the following sections:
-
- - [Setup](#setup) - the environment and code setup required to get started and a brief overview of the project structure
- - [The Tasks](#the-tasks) - the tasks you will need to complete for the project
- - [Tips and Tricks](#tips-and-tricks) - some additional tips and tricks you may find useful along the way
- - [Submission](#submission) - overview of the requirements for your project submission
-
 ## The Tasks ##
 
  - [Step 1: Sensor Noise](#step-1-sensor-noise)
@@ -32,7 +25,12 @@ after integration are converted back to global frame.
 
 ### Step 3: Prediction Step ###
 
-Implemented in `PredictState()` and `Predict()`.
+Implemented in `Predict()`.
+New state is computed by `PredictState()` function.
+The covariance is computed from `Σt = GtΣt−1GTt + Qt`, where `Gt` is the `gPrime` matrix.
+Part of `gPrime` matrix is computed by `GetRbgPrime()`.
+
+![predict_formula](images/formula_predict.png)
 
 ![predict_state](images/sim_predict_state.png)
 
