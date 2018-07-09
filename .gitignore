@@ -25,3 +25,8 @@ bld/
 
 # manual cmake build ignores
 build/
+
+.vscode/
+project/FCND-CPPSim.xcodeproj/
+.DS_Store
+
