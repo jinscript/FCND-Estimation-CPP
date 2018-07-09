@@ -9,57 +9,6 @@ This README is broken down into the following sections:
  - [Tips and Tricks](#tips-and-tricks) - some additional tips and tricks you may find useful along the way
  - [Submission](#submission) - overview of the requirements for your project submission
 
-
-## Setup ##
-
-This project will continue to use the C++ development environment you set up in the Controls C++ project.
-
- 1. Clone the repository
- ```
- git clone https://github.com/udacity/FCND-Estimation-CPP.git
- ```
-
- 2. Import the code into your IDE like done in the [Controls C++ project](https://github.com/udacity/FCND-Controls-CPP#development-environment-setup)
- 
- 3. You should now be able to compile and run the estimation simulator just as you did in the controls project
-
-
-### Project Structure ###
-
-For this project, you will be interacting with a few more files than before.
-
- - The EKF is already partially implemented for you in `QuadEstimatorEKF.cpp`
-
- - Parameters for tuning the EKF are in the parameter file `QuadEstimatorEKF.txt`
-
- - When you turn on various sensors (the scenarios configure them, e.g. `Quad.Sensors += SimIMU, SimMag, SimGPS`), additional sensor plots will become available to see what the simulated sensors measure.
-
- - The EKF implementation exposes both the estimated state and a number of additional variables. In particular:
-
-   - `Quad.Est.E.X` is the error in estimated X position from true value.  More generally, the variables in `<vehicle>.Est.E.*` are relative errors, though some are combined errors (e.g. MaxEuler).
-
-   - `Quad.Est.S.X` is the estimated standard deviation of the X state (that is, the square root of the appropriate diagonal variable in the covariance matrix). More generally, the variables in `<vehicle>.Est.S.*` are standard deviations calculated from the estimator state covariance matrix.
-
-   - `Quad.Est.D` contains miscellaneous additional debug variables useful in diagnosing the filter. You may or might not find these useful but they were helpful to us in verifying the filter and may give you some ideas if you hit a block.
-
-
-#### `config` Directory ####
-
-In the `config` directory, in addition to finding the configuration files for your controller and your estimator, you will also see configuration files for each of the simulations.  For this project, you will be working with simulations 06 through 11 and you may find it insightful to take a look at the configuration for the simulation.
-
-As an example, if we look through the configuration file for scenario 07, we see the following parameters controlling the sensor:
-
-```
-# Sensors
-Quad.Sensors = SimIMU
-# use a perfect IMU
-SimIMU.AccelStd = 0,0,0
-SimIMU.GyroStd = 0,0,0
-```
-
-This configuration tells us that the simulator is only using an IMU and the sensor data will have no noise.  You will notice that for each simulator these parameters will change slightly as additional sensors are being used and the noise behavior of the sensors change.
-
-
 ## The Tasks ##
 
 Once again, you will be building up your estimator in pieces.  At each step, there will be a set of success criteria that will be displayed both in the plots and in the terminal output to help you along the way.
@@ -215,28 +164,3 @@ Up to this point, we have been working with a controller that has been relaxed t
 **Hint: you may find it easiest to do your de-tuning as a 2 step process by reverting to ideal sensors and de-tuning under those conditions first.**
 
 ***Success criteria:*** *Your objective is to complete the entire simulation cycle with estimated position error of < 1m.*
-
-
-## Tips and Tricks ##
-
- - When it comes to transposing matrices, `.transposeInPlace()` is the function you want to use to transpose a matrix
-
- - The [Estimation for Quadrotors](https://www.overleaf.com/read/vymfngphcccj) document contains a helpful mathematical breakdown of the core elements on your estimator
-
-## Submission ##
-
-For this project, you will need to submit:
-
- - a completed estimator that meets the performance criteria for each of the steps by submitting:
-   - `QuadEstimatorEKF.cpp`
-   - `config/QuadEstimatorEKF.txt`
-
- - a re-tuned controller that, in conjunction with your tuned estimator, is capable of meeting the criteria laid out in Step 6 by submitting:
-   - `QuadController.cpp`
-   - `config/QuadControlParams.txt`
-
- - a write up addressing all the points of the rubric
-
-## Authors ##
-
-Thanks to Fotokite for the initial development of the project code and simulator.
